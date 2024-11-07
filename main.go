@@ -61,8 +61,8 @@ func getPrice() (float64, float64, error) {
 // progressBar displays a bounded progress bar that fills progressively over time on a single line.
 func progressBar(seconds int) {
 	for i := 0; i < seconds; i++ {
-		time.Sleep(1 * time.Second)
 		fmt.Printf("\r[%-*s]", seconds, strings.Repeat("#", i+1)) // Overwrite with updated progress bar
+		time.Sleep(1 * time.Second)
 	}
 	fmt.Println() // Move to a new line after progress is done
 }
