@@ -78,11 +78,11 @@ func main() {
 			continue
 		}
 
-		col := n        // Default color (normal)
-		var pct float64 // Percentage change between prices
+		col := n // Default color (normal)
+		var pct, diff float64
 
 		if lastUSD != 0 { // If we have a previous USD price to compare with
-			diff := pUSD - lastUSD
+			diff = pUSD - lastUSD
 			pct = (diff / lastUSD) * 100
 
 			if diff > 0 {
@@ -90,9 +90,13 @@ func main() {
 			} else if diff < 0 {
 				col = r // Price decreased: use red color
 			}
+		} else {
+			fmt.Printf("BTC Price: %s$%.2f | %.2f€%s\n", col, pUSD, pEUR, n)
 		}
 
-		fmt.Printf("BTC Price: %s$%.2f (%.2f%%) | €%.2f%s\n", col, pUSD, pct, pEUR, n)
+		if diff != 0 {
+			fmt.Printf("BTC Price: %s$%.2f (%.2f%%) | %.2f€%s\n", col, pUSD, pct, pEUR, n)
+		}
 
 		lastUSD = pUSD // Update last USD price for next iteration
 
