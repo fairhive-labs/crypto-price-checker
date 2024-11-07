@@ -60,6 +60,7 @@ func getPrice() (float64, float64, error) {
 func main() {
 	var lastUSD float64 // Store the last fetched USD price
 
+	fmt.Println("PRICE CHECKER started...")
 	for {
 		pUSD, pEUR, err := getPrice()
 		if err != nil {
@@ -81,10 +82,10 @@ func main() {
 			}
 		}
 
-		fmt.Printf("BTC Price: %s$%.2f (%.2f%%) | €%.2f%s", col, pUSD, pct, pEUR, n)
+		fmt.Printf("BTC Price: %s$%.2f (%.2f%%) | €%.2f%s\n", col, pUSD, pct, pEUR, n)
 
 		lastUSD = pUSD // Update last USD price for next iteration
 
-		time.Sleep(10 * time.Second) // Wait for 10 seconds before refreshing
+		time.Sleep(30 * time.Second) // Wait for 30 seconds before refreshing
 	}
 }
