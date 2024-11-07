@@ -10,9 +10,10 @@ import (
 )
 
 const (
-	n = "\033[0m"  // Normal text color
-	r = "\033[31m" // Red color for price decrease
-	g = "\033[32m" // Green color for price increase
+	n        = "\033[0m"  // Normal text color
+	r        = "\033[31m" // Red color for price decrease
+	g        = "\033[32m" // Green color for price increase
+	waitTime = 10         // Wait time in seconds
 )
 
 // PriceData represents the structure of the JSON response from the API.
@@ -57,6 +58,16 @@ func getPrice() (float64, float64, error) {
 	return pUSD, pEUR, nil
 }
 
+// progressBar simulates a bounded progress bar by printing '#' over the wait period.
+func progressBar(seconds int) {
+	fmt.Printf("[") // Start boundary of the progress bar
+	for i := 0; i < seconds; i++ {
+		fmt.Printf("#") // Print a '#' for each second elapsed
+		time.Sleep(1 * time.Second)
+	}
+	fmt.Printf("]\n") // End boundary of the progress bar and move to a new line
+}
+
 func main() {
 	var lastUSD float64 // Store the last fetched USD price
 
@@ -86,6 +97,6 @@ func main() {
 
 		lastUSD = pUSD // Update last USD price for next iteration
 
-		time.Sleep(30 * time.Second) // Wait for 30 seconds before refreshing
+		progressBar(waitTime) // Display bounded progress bar for waitTime seconds
 	}
 }
