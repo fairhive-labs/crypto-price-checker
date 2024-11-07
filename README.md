@@ -49,5 +49,3 @@ This project uses Go's standard library, so no external dependencies are require
 ## API Used
 [CoinDesk API](https://www.coindesk.com/) for fetching real-time Bitcoin prices.
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details. 
